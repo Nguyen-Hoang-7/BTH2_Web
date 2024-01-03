@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tính lương</title>
+        <script>
+            function tinhluong() {
+                var luong = document.getElementById("luong").value;
+                var heso = document.getElementById("heso").value;
+                //console.log(luong);
+                var tinhluong = parseFloat(luong * heso);
+                document.getElementById("luongthang").innerHTML = tinhluong;
+                console.log(tinhluong);
+            }
+            
+        </script>
+        <style>
+            table {
+                background-color: bisque;
+                border: 1px solid blue;
+            }
+            td {
+                border: 1px solid blue;
+            }
+        </style>
+    </head>
+    <body>
+        <table align="center" width="550px">
+            <tr align="center">
+                <td>Lương</td>
+                <td><input type="number" id="luong"></td>
+            </tr>
+            <tr align="center">
+                <td>Hệ số</td>
+                <td><input type="number" id="heso" step="0.1"></td>
+            </tr>
+            <tr>
+                
+                <td align="center" colspan="2"><input style="border-radius: 10px; width: 100px;" type="button" onclick="tinhluong()" value="Tính lương"></td>
+            </tr>
+            <tr align="center">
+                <td>Lương tháng</td>
+                <td><div id="luongthang"></div></td>
+            </tr>
+        </table>
+    </body>
+</html>

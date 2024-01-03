@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <script>
+            function tinhtien() {
+                var phim = document.getElementById("phim").value;
+                var suatchieu = document.getElementById("suatChieu").value;
+                var phongchieu = document.getElementById("phongChieu").value;
+
+                var selectedSeats = [];
+                for (var option of document.getElementById("chonCho").selectedOptions)
+                {
+                    selectedSeats.push(option.value);
+                }
+
+                var giave = parseFloat(suatchieu) * parseFloat(phongchieu);
+                var tongTien = parseFloat(giave) * parseFloat(selectedSeats.length);
+
+                var thongtin = "Thông tin vé\n";
+                thongtin += tongTien;
+
+                console.log(selectedSeats);
+                var thongtinwindow = window.open("", "Thông tin vé", "width=400, height=400");
+                thongtinwindow.document.write(thongtin);
+            }
+        </script>
+    </head>
+    <body>
+        <form>
+            
+            <select id="phim">
+                <option>Yêu em bất chấp</option>
+                <option>Tháng năm rực rỡ</option>
+                <option>Và em sẽ đến</option>
+                <option>Chuyện ma lúc 3 giờ sáng</option>
+            </select>
+            <br>
+
+            <label for="suatChieu">Drop-down Suất chiếu:</label>
+            <select id="suatChieu">
+                <option value="45000">9h – 12h</option>
+                <option value="50000">13h – 16h</option>
+                <option value="60000">17h – 20h</option>
+                <option value="70000">22h – 2h</option>
+            </select>
+            <br>
+
+            <label for="phongChieu">Drop-down Phòng chiếu:</label>
+            <select id="phongChieu">
+                <option value="1">Đồng</option>
+                <option value="2">Bạc</option>
+                <option value="3">Vàng</option>
+                <option value="4">Kim Cương</option>
+            </select>
+            <br>
+
+            <label for="chonCho">Drop-down chọn chỗ:</label>
+            <select id="chonCho" multiple="multiple">
+                <option>Ghế 01</option>
+                <option>Ghế 02</option>
+                <option>Ghế 03</option>
+            </select>
+            <br>
+
+            <label for="tenKhachHang">Khách hàng:</label>
+            <input type="text" id="tenKhachHang">
+            <br>
+
+            <label for="ngayChieu">Ngày chiếu:</label>
+            <input type="text" id="ngayChieu">
+            <br>
+
+            <input type="button" value="Mua vé" onclick="tinhtien()">
+        </form>
+    </body>
+</html>

@@ -1,0 +1,118 @@
+<html>
+    <head>
+        <title>Mua vé xem phim</title>
+        <style>
+            table{
+                border: 1px solid black;
+            }
+            th, td{
+                border: 1px solid black;
+            }
+        </style>
+        <script>
+            function tinhtien()
+            {
+                var ten = document.getElementById("hoten").value;
+                var ngay = document.getElementById("ngay").value;
+                var phim = document.getElementById("phim").value;
+                var suatchieu = document.getElementById("suatchieu").value;
+                
+                var phongchieu = document.getElementById("phongchieu").value;
+                var p = document.getElementById("phongchieu");
+                var phongchieu1 = p.options[p.selectedIndex].className;
+                
+                var kq = "";
+                var chongoi = [];
+                for (var ptu of document.getElementById("chongoi").selectedOptions)
+                {
+                    
+                    chongoi.push(ptu.value);
+                }
+
+                var tien = parseFloat(suatchieu) * parseFloat(phongchieu);
+                var tong = parseFloat(chongoi.length) * parseFloat(tien);
+                var ve = "<tr>" + "<th colspan=2 style=border:none>" + "Thông tin vé" + "</th>" + "</tr>";
+                var chuoiten = "<tr>" + "<td style=border:none>" + "Khách hàng" + "</td>" + "<td style=border:none>" + ten + "</td>" + "</tr>";
+                var chuoingay = "<tr>" + "<td style=border:none>" + "Ngày" + "</td>" + "<td style=border:none>" + ngay + "</td>" + "</tr>";
+                var chuoiphim = "<tr>" + "<td style=border:none>" + "Phim" + "</td>" + "<td style=border:none>" + phim + "</td>" + "</tr>";
+                var chuoisuatchieu = "<tr>" + "<td style=border:none>" + "Suất chiếu" + "</td>" + "<td style=border:none>" + suatchieu + "</td>" + "</tr>"
+                var chuoiphongchieu = "<tr>" + "<td style=border:none>" + "Phòng chiếu" + "</td>" + "<td style=border:none>" + phongchieu1 + "</td>" + "</tr>";
+                var ghe = "<tr align=center style=font-weight:bold>" + "<td style=border:none>" + "Ghế" + "</td>" + "<td style=border:none>" + "Giá vé" + "</td>" + "</tr>";
+                for (var i = 0; i < chongoi.length; i++)
+                {
+                    kq += "<tr align=center>" + "<td style=border:none>" + chongoi[i] + "</td>" + "<td style=border:none>" + tien + " đ" + "</td>" + "</tr>";
+                    
+                }
+                kq += "<tr align=center style=font-weight:bold>" + "<td style=border:none>" + "Tổng tiền" + "</td>" + "<td style=border:none>" + tong + " đ" + "</td>" + "</tr>"
+                var thongtin = "<br><table width=400px>" + ve + chuoiten + chuoingay + chuoiphim + chuoisuatchieu + chuoiphongchieu + ghe + kq + "</table>";
+                document.getElementById("thongtinve").innerHTML = thongtin;
+            }
+        </script>
+    </head>
+    <body>
+        <form name="Create">
+            <table align="center" width="400px">
+                <tr align="center">
+                    <th colspan="2" style="font-weight: bold;">Mua vé</th>
+                </tr>
+                <tr>
+                    <td>Khách hàng</td>
+                    <td><input id="hoten" type="text" placeholder="Họ và tên"></td>
+                </tr>
+                <tr>
+                    <td>Ngày chiếu</td>
+                    <td><input id="ngay" type="text" placeholder="dd/mm/yyyy"></td>
+                </tr>
+                <tr>
+                    <td>Phim</td>
+                    <td>
+                        <select id="phim">
+                            <option>Yêu em bất chấp</option>
+                            <option>Tháng năm rực rỡ</option>
+                            <option>Và em sẽ đến</option>
+                            <option>Chuyện ma lúc 3 giờ sáng</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Suất chiếu</td>
+                    <td>
+                        <select id="suatchieu">
+                            <option value="45000">9h - 12h</option>
+                            <option value="45000">13h - 16h</option>
+                            <option value="55000">17h - 20h</option>
+                            <option value="35000">22h - 2h</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Phòng chiếu</td>
+                    <td>
+                        <select id="phongchieu">
+                            <option value="1.0" class="Đồng">Đồng</option>
+                            <option value="1.2" class="Bạc">Bạc</option>
+                            <option value="1.5" class="Vàng">Vàng</option>
+                            <option value="2.0" class="Kim cương">Kim cương</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Chọn chỗ ngồi</td>
+                    <td>
+                        <select id="chongoi" multiple="multiple">
+                            <option>Ghế 01</option>
+                            <option>Ghế 02</option>
+                            <option>Ghế 03</option>
+                            
+                        </select>
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2"><input type="button" value="Mua vé" onclick="tinhtien()"></td>
+                </tr>
+            </table>
+
+            <div id="thongtinve" align="center"></div>
+        </form>
+    </body>
+</html>

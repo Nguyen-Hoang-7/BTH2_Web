@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tính hóa đơn</title>
+        <style>
+            table{
+                background-color: chartreuse;
+                
+                border: 1px solid black;
+            }
+            th, td{
+                border: 1px solid black;
+            }
+        </style>
+        <script>
+            function tinhtien() {
+                var chonmon = "";
+                var tongtien = 0;
+                var chon1 = document.getElementById("chondoan").selectedOptions;
+                var chon2 = document.getElementById("chonnuocuong").selectedOptions;
+                for (var i = 0; i < chon1.length; i++)
+                {
+                    chonmon += "<tr>" + "<td>" + chon1[i].getAttribute("food") + "</td>" + "<td>" +chon1[i].getAttribute("price") + "</td>" + "</tr>";
+                    tongtien += parseFloat(chon1[i].getAttribute("price"));
+                    console.log(chon1[i].getAttribute("food"));
+                    console.log(chon1[i].getAttribute("price"));
+                }
+                for (var i = 0; i < chon2.length; i++)
+                {
+                    chonmon += "<tr>" + "<td>" + chon2[i].getAttribute("drink") + "</td>" + "<td>" + chon2[i].getAttribute("price") + "</td>" + "</tr>";
+                    tongtien += parseFloat(chon2[i].getAttribute("price"));
+                    console.log(chon2[i].getAttribute("drink"));
+                    console.log(chon2[i].getAttribute("price"));
+                }
+
+                var tgian = document.forms["Orderform"].elements["time"].value;
+                var hoadon;
+                if (tgian != "")
+                {
+                    if (tgian == "bandem")
+                    {
+                        tongtien = tongtien * 110/100;
+                    }
+                    
+                    //hoadon = "<br>Món đã chọn <br>" + chonmon + "</br> Tổng tiền: " + tongtien; 
+                    hoadon = "<br>" + "<table width= 600px>" + "<tr>" + "<td>" + "Các món đã dùng" + "</td>" + "<td>" + "Tiền" + "</td>" + "</tr>" + chonmon + "<tr>" + "<td>" + "Tổng tiền" + "</td>" + "<td>" + tongtien + "</td>" + "</tr>" + "</table>";
+                }
+                else
+                {
+                    hoadon = "<br>Vui lòng chọn thời điểm !!!";
+                }
+                
+                
+                document.getElementById("hoadon").innerHTML = hoadon; 
+            }
+        </script>
+    </head>
+    <body >
+        <form name="Orderform">
+            <table width="550px" align="center" >
+                <tr>
+                    <th colspan="3" height="100px" style="font-size: 35px;">THỰC ĐƠN</th>
+                </tr>
+                <tr align="center" height="30px">
+                    
+                    <td style="font-weight: bold; font-size: 20px; color: blue;">
+                        Thức ăn
+                    </td>
+                    <td style="font-weight: bold; font-size: 20px; color: blue;">
+                        Nước uống
+                    </td>
+                    <td style="font-weight: bold; font-size: 20px; color: blue;">
+                        Thời điểm
+                    </td>
+                </tr>
+                <tr align="center">
+                    
+                    <td>
+                        <select id="chondoan" multiple="multiple">
+                            <option value="food" food="Bún bò" price="20000">Bún bò</option>
+                            <option value="food" food="Hủ tiếu" price="18000">Hủ tiếu</option>
+                            <option value="food" food="Bánh canh" price="17000">Bánh canh</option>
+                            <option value="food" food="Phở bò" price="19000">Phở bò</option>
+                            <option value="food" food="Nui" price="15000">Nui</option>
+                            <option value="food" food="Bánh mì thịt" price="12000">Bánh mì thịt</option>
+                            <option value="food" food="Bánh cuốn" price="15000">Bánh cuốn</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select id="chonnuocuong" multiple="multiple">
+                            <option value="drink" drink="Cà phê đá" price="12000">Cà phê đá</option>
+                            <option value="drink" drink="Cà phê sữa đá" price="15000">Cà phê sữa đá</option>
+                            <option value="drink" drink="Chanh dây" price="13000">Chanh dây</option>
+                            <option value="drink" drink="Chanh muối" price="12000">Chanh muối</option>
+                            <option value="drink" drink="Xí muội" price="14000">Xí muội</option>
+                            <option value="drink" drink="Sữa tươi" price="13000">Sữa tươi</option>
+                            <option value="drink" drink="Cam vắt" price="17000">Cam vắt</option>
+                        </select>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                <input type="radio" name="time" value="banngay">Ban ngày
+                            </li>
+                            <li>
+                                <input type="radio" name="time" value="bandem">Ban đêm
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td colspan="3" align="center">
+                        <input style="border-radius: 10px; width: 100px;" type="button" onclick="tinhtien()" value="Tính tiền"></td>
+                    </td>
+                    
+                </tr>
+            </table>
+            <div id="hoadon" align="center"></div>
+        </form>
+        
+    </body>
+</html>

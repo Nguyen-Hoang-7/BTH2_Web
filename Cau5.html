@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tính tiền diện thoại</title>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+            updateTotal();
+            
+            function updateTotal() {
+                let total = 0;
+                const subtotalElements = document.querySelectorAll(".subtotal");
+                subtotalElements.forEach(function(subtotal) {
+                total += parseFloat(subtotal.textContent);
+                });
+                document.getElementById("tong").textContent = total;
+            }
+            
+            function calculateSubtotal(row) {
+                const quantity = parseFloat(row.querySelector(".quantity").value);
+                const price = parseFloat(row.querySelector(".price").value);
+                const subtotal = quantity * price;
+                
+                row.querySelector(".subtotal").textContent = subtotal;
+            }
+            
+            const table = document.getElementById("product-table");
+            
+            table.addEventListener("input", function(e) {
+                if (e.target.classList.contains("quantity") || e.target.classList.contains("price")) {
+                const row = e.target.closest("tr");
+                calculateSubtotal(row);
+                updateTotal();
+                }
+            });
+            
+            table.addEventListener("click", function(e) {
+                if (e.target.classList.contains("delete")) {
+                const row = e.target.closest("tr");
+                row.remove();
+                updateTotal();
+                }
+            });
+            });
+        </script>
+        <style>
+            
+            table {
+                background-color: bisque;
+                border: 1px solid black;
+            }
+            th,td {
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <table id="product-table" align="center" width="800px">
+            <tr align="center">
+                <th style="width: 30%;">Sản phẩm</th>
+                <th style="width: 20%;">Số lượng</th>
+                <th style="width: 20%;">Đơn giá</th>
+                <th style="width: 20%;">Thành tiền</th>
+                <th style="width: 20%;">Chức năng</th>
+            </tr>
+            <tr>
+                <td>Iphone 11 Pro Max 64GB</td>
+                <td><input type="number" value="1" class="quantity"></td>
+                <td><input type="number" value="8490000" class="price"></td>
+                <td class="subtotal">8490000</td>
+                <td align="center"><input type="button" class="delete" value="Xóa" style="border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <td>Samsung Galaxy Note 10</td>
+                <td><input type="number" value="1" class="quantity"></td>
+                <td><input type="number" value="4290000" class="price"></td>
+                <td class="subtotal">4290000</td>
+                <td align="center"><input type="button" class="delete" value="Xóa" style="border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <td>Iphone 14 Pro 256GB</td>
+                <td><input type="number" value="1" class="quantity"></td>
+                <td><input type="number" value="24190000" class="price"></td>
+                <td class="subtotal">24190000</td>
+                <td align="center"><input type="button" class="delete" value="Xóa" style="border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <td>Samsung Galaxy Z Fold5 5G</td>
+                <td><input type="number" value="1" class="quantity"></td>
+                <td><input type="number" value="36000000" class="price"></td>
+                <td class="subtotal">36000000</td>
+                <td align="center"><input type="button" class="delete" value="Xóa" style="border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <td>Samsung Galaxy S23 5G 128GB</td>
+                <td><input type="number" value="1" class="quantity"></td>
+                <td><input type="number" value="13290000" class="price"></td>
+                <td class="subtotal">13290000</td>
+                <td align="center"><input type="button" class="delete" value="Xóa" style="border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <td>OPPO Reno10 Pro+ 5GB</td>
+                <td><input type="number" value="1" class="quantity"></td>
+                <td><input type="number" value="20000000" class="price"></td>
+                <td class="subtotal">20000000</td>
+                <td align="center"><input type="button" class="delete" value="Xóa" style="border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <td>Iphone 15 Pro Max 256GB</td>
+                <td><input type="number" value="1" class="quantity"></td>
+                <td><input type="number" value="36490000" class="price"></td>
+                <td class="subtotal">36490000</td>
+                <td align="center"><input type="button" class="delete" value="Xóa" style="border-radius: 5px;"></td>
+            </tr>
+            <tr>
+                <td colspan="3">Tổng tiền</td>
+                <td colspan="2"><div id="tong"></div></td>
+            </tr>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+<table id="product-table">
+    <thead>
+      <tr>
+        <th>Sản phẩm</th>
+        <th>Số lượng</th>
+        <th>Đơn giá</th>
+        <th>Tổng tiền</th>
+        <th>Xóa</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sản phẩm 1</td>
+        <td><input type="number" value="1" class="quantity"></td>
+        <td><input type="number" value="10" class="price"></td>
+        <td class="subtotal">10</td>
+        <td><button class="delete">Xóa</button></td>
+      </tr>
+      <td>Sản phẩm 2</td>
+        <td><input type="number" value="1" class="quantity"></td>
+        <td><input type="number" value="10" class="price"></td>
+        <td class="subtotal">10</td>
+        <td><button class="delete">Xóa</button></td>
+      </tr>
+      <td>Sản phẩm 3</td>
+        <td><input type="number" value="1" class="quantity"></td>
+        <td><input type="number" value="10" class="price"></td>
+        <td class="subtotal">10</td>
+        <td><button class="delete">Xóa</button></td>
+      </tr>
+      <!-- Thêm các hàng sản phẩm khác ở đây -->
+    </tbody>
+  </table>
+  <div id="total">Tổng tiền: <span id="total-amount">10</span></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      updateTotal();
+    
+      function updateTotal() {
+        let total = 0;
+        const subtotalElements = document.querySelectorAll(".subtotal");
+        subtotalElements.forEach(function(subtotal) {
+          total += parseFloat(subtotal.textContent);
+        });
+        document.getElementById("total-amount").textContent = total;
+      }
+    
+      function calculateSubtotal(row) {
+        const quantity = parseFloat(row.querySelector(".quantity").value);
+        const price = parseFloat(row.querySelector(".price").value);
+        const subtotal = quantity * price;
+        row.querySelector(".subtotal").textContent = subtotal;
+      }
+    
+      const table = document.getElementById("product-table");
+    
+      table.addEventListener("input", function(e) {
+        if (e.target.classList.contains("quantity") || e.target.classList.contains("price")) {
+          const row = e.target.closest("tr");
+          calculateSubtotal(row);
+          updateTotal();
+        }
+      });
+    
+      table.addEventListener("click", function(e) {
+        if (e.target.classList.contains("delete")) {
+          const row = e.target.closest("tr");
+          row.remove();
+          updateTotal();
+        }
+      });
+    });
+    </script>
+    

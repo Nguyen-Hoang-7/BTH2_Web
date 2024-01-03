@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Đăng ký thông tin du lịch</title>
+        <script>
+            function tinhve() {
+                var ten = document.getElementById("ten").value;
+                var diachi = document.getElementById("diachi").value;
+                var dienthoai = document.getElementById("dienthoai").value;
+                var tour = document.getElementById("tour").value;
+                var tour1 = document.getElementById("tour");
+                var tour2 = tour1.options[tour1.selectedIndex];
+                var nglon = document.getElementById("adults").value;
+                var embe = document.getElementById("children").value;
+                var ghichu = document.getElementById("ghichu").value;
+                var tongTien = 0;
+                tongTien = parseFloat(nglon * tour + embe * tour/2);
+                var currentDate = new Date();
+                var currentYear = currentDate.getFullYear();
+                var currentDayOfWeek = currentDate.getDay() + 1;
+                var currentDay = currentDate.getDate();
+                var currentMonth = currentDate.getMonth();
+                var currentHour = currentDate.getHours();
+                var currentMinute = currentDate.getMinutes();
+                var currentSecond = currentDate.getSeconds();
+                
+                var chuoitgian = "<tr><td colspan=2>" + "Ngày đăng ký" + "</td>" + "<td colspan=2>" + "Thứ " + currentDayOfWeek + ", " + currentDay + "/" + currentMonth + "/" + currentYear + ", " + currentHour + ":" + currentMinute + ":" + currentSecond + "</td></tr>";
+                if (currentDayOfWeek == 1)
+                {
+                    chuoitgian = "<tr><td colspan=2>" + "Ngày đăng ký" + "</td>" + "<td colspan=2>" + "Chủ Nhật" + ", " + currentDay + "/" + currentMonth + "/" + currentYear + ", " + currentHour + ":" + currentMinute + ":" + currentSecond + "</td></tr>";
+                }
+                
+                var chuoithongtin = "<tr><th colspan=4>Thông tin đăng ký</th></tr>";
+                var chuoinhanvien = "<tr>" + "<td colspan=2>" + "Nhân viên" + "</td>" + "<td colspan=2>Họ tên nhân viên</td>" + "</tr>";
+                var chuoiten =  "<tr>" + "<td colspan=2>" + "Họ tên khách" + "</td>" + "<td colspan=2>" + ten + "</td>" + "</tr>";
+                var chuoidiachi = "<tr>" + "<td colspan=2>" + "Địa chỉ" + "</td>" + "<td colspan=2>" + diachi + "</td>" + "</tr>";
+                var chuoitour = "<tr>" + "<td colspan=2>" + "Tour" + "</td>" + "<td colspan=2>" + tour2.text + "</td>" + "</tr>";
+                var chuoighichu = "<tr>" + "<td colspan=2>" + "Ghi chú" + "</td>" + "<td colspan=2>" + ghichu + "</td>" + "</tr>";
+                var chuoikhachdoan = "<tr><td colspan=4>Số lượng khách đoàn</td></tr>";
+                var chuoihead = "<tr>" + "<td style=width:15%></td>" + "<td style=width:15%>" + "SL" + "</td>" + "<td style=width:35%>" + "Đơn giá" + "</td>" + "<td style=width:35%>" + "Thành tiền" + "</td>" + "</tr>";
+                
+                var chuoinglon = "<tr>" + "<td>Người lớn</td>" + "<td>" + nglon + "</td>" + "<td>" + tour + "</td>" + "<td>" + nglon * tour + "</td>" + "</tr>";
+                var chuoiembe = "<tr>" + "<td>Em bé</td>" + "<td>" + embe + "</td>" + "<td>" + tour/2 + "</td>" + "<td>" + embe * tour/2 + "</td>" + "</tr>";
+                var chuoitongtien = "<tr>" + "<td colspan=2 align=center style=font-weight:bold>" + "Tổng tiền" + "</td>" + "<td colspan=2 align=center style=font-weight:bold>" + tongTien + "đ" + "</td>" + "</tr>";
+                var kq = chuoithongtin + chuoitgian + chuoinhanvien + chuoiten + chuoidiachi + chuoitour + chuoighichu + chuoikhachdoan + chuoihead + chuoinglon + chuoiembe + chuoitongtien;
+                var thongtin = "<br><br><table width=600px align=center border: 1px solid black>" + kq + "</table>";
+                var thongtinwindow = window.open("", "Thông tin đăng ký du lịch", "width=400, height=400");
+                
+                if (tour > 1)
+                {
+                    thongtinwindow.document.write(thongtin);
+                }
+            } 
+            
+        </script>
+        <style>
+            table {
+                background-color: #FFDD99;
+                border: 1px solid blue;
+                
+            }
+            td {
+                border: 1px solid blue;
+            }
+        </style>
+    </head>
+    <body>
+        <table align="center" width="700px">
+            <tr height="60px" align="center">
+                <th colspan="2"style="font-size: 25px;">Phiếu đăng ký tour du lịch</th>
+            </tr>
+            <tr>
+                <td>Họ và tên khách</td>
+                <td><input type="text" placeholder="Nguyễn Văn A" id="ten"></td>
+            </tr>
+            <tr>
+                <td>Địa chỉ</td>
+                <td><input type="text" style="width: 300px;" placeholder="abc, xyz, jqk" id="diachi"></td>
+            </tr>
+            <tr>
+                <td>Điện thoại</td>
+                <td><input type="tel" placeholder="09xxxxxxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="dienthoai"></td>
+            </tr>
+            <tr>
+                <td>Tour</td>
+                <td>
+                    
+                    <select id="tour" name="tour">
+                        <option value="1" tour="Chọn tour">Chọn tour</option>
+                        <option value="10000000" tour="Hà Nội - Hạ Long - Tuần Châu">Hà Nội - Hạ Long - Tuần Châu</option>
+                        <option value="6000000" tour="Chọn tour">Hà Nội - Sapa</option>
+                        <option value="3000000" tour="Chọn tour">Đà Nẵng - Hội An</option>
+                        <option value="2000000" tour="Chọn tour">Buôn Mê Thuột - Kon Tum</option>
+                        <option value="3500000" tour="Chọn tour">TP.HCM - Nha Trang</option>
+                        <option value="2500000" tour="Chọn tour">TP.HCM - Cần Thơ - Cà Mau</option>
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <fieldset style="width: 500px;">
+                        <legend>Số lượng đoàn khách</legend>
+                      
+                        <!-- Place related form elements or content here -->
+                        <label for="nguoilon">Người lớn :</label>
+                        <input type="number" style="width: 40px;" id="adults" min="0" name="adults" step="1"><br>
+                      
+                        <label for="treem">Trẻ em :</label>
+                        <input type="number" style="width: 40px;" id="children" min="0" name="children" step="1"><br>
+                    </fieldset>
+                      
+
+                </td>
+            </tr>
+            <tr>
+                <td>Ghi chú</td>
+                <td>
+                    <textarea id="ghichu" name="myTextarea" rows="5" cols="40">
+                  </textarea>
+                </td>
+            </tr>
+            <tr>
+                
+                <td align="center" colspan="2"><input style="width: 100px;" type="button" onclick="tinhve()" value="Đăng ký"></td>
+            </tr>
+        </table>
+    </body>
+</html>
